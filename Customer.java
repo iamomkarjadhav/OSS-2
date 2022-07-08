@@ -17,5 +17,6 @@ public class Customer {
 		System.out.println("Emmail id: "+emailid);
 		System.out.println("Name     : "+name);
 	}
+	//cmnt added by omkar padmale
 
 }
