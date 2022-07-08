@@ -1,0 +1,91 @@
+1.Display name concatenated with dept no separated by comma and space. Name the column as ‘Emp info’ 
+	select ename,deptno,concat(ename,", ",deptno) 'Emp info' from emp;
+
+2.Display the emp details who do not have manager
+	select * from emp
+	where job not in('manager');
+  
+3.Write a query which will display name, department no and date of joining of all employees joined between January 1, 1981 and March 31, 1983. Sort it based on date of joining (ascending).
+	select ename,deptno,hiredate
+	from emp
+	where hiredate between '1981-01-01' and '1983-03-31'
+	order by hiredate asc;
+	  
+4.Write a query to list all employees and their email.To generate email use 2 to 5 characters from ename .Concat it with 2 to 4 characters in job and then concat it with ‘@mycompany.com’
+	select * ,concat(substr(ename,2,4),substr(job,2,3),'@mycompany.com') email from emp;
+  
+5.Display all employees who joined between years 1981 to 1983.
+	select * from emp
+	where hiredate between '1981-01-01' and '1983-12-31';
+
+6.Create following tables for given schema.(We will be using this table
+  for further transactions as well).
+  trainer(tid PK, tname, cid fk)
+  course(cid pk, cname)
+   1. insert 5 meaningful records in both the tables.
+   2. In the above course table , add new column fees.
+   
+	create table course
+	(
+	cid int,
+	cname varchar(40),
+	primary key(cid)
+	);
+	create table trainer
+	(
+	tid int,
+	cid int,
+	tname varchar(40),
+	foreign key(cid) references course(cid),
+	primary key(tid)
+	);
+	insert into course
+	values(101,'DAC');
+	insert into course
+	values(102,'DBDA');
+	insert into course
+	values(103,'DMC');
+	insert into course
+	values(104,'DESD');
+	insert into course
+	values(105,'ROBOTICS');
+
+	insert into trainer
+	values(1,102,'Patil');
+	insert into trainer
+	values(2,101,'Joshi');
+	insert into trainer
+	values(3,102,'Rohra');
+	insert into trainer
+	values(4,104,'Sathe');
+	insert into trainer
+	values(5,103,'Jadhav');
+
+	alter table course
+	add fees decimal(7,2);
+   
+7.delete all employees who are not working in department 30 and 20
+	delete from emp
+	where deptno not in(20,30);
+  
+8.Using table alias display eno,ename,deptno and dname
+	select a.empno,a.ename,b.deptno,b.dname
+	from emp a,dept b
+	where a.deptno=b.deptno;
+
+9. change the job to manager and mgr to 7777 for all employees in deptno 10
+	update emp10
+	set job='manager',
+	mgr=7777
+	where deptno=10;  
+
+10.Display hiredate from emp table in different formats
+	select ename,hiredate,date_format(hiredate,'%d=%m=%Y') from emp;
+	select ename,hiredate,date_format(hiredate,'%d/%m/%Y') from emp;
+	select ename,hiredate,date_format(hiredate,'%d::%m::%Y') from emp;
+
+11.Select all employees along with dnamae for sal > 20000
+	select a.empno,a.ename,a.deptno,b.dname
+	from emp a, dept b
+	where a.deptno=b.deptno  and  a.sal>2000;
+  
